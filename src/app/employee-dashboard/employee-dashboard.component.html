@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <h1 style="color:antiquewhite">Angular CRUD</h1>
         <div class="d-flex">
-            <button style="background-color:green" type="button" class="btn btn-primary" data-bs-toggle="modal"
+            <button (click)="clickAddUser()" style="background-color:green" type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Add Employee</button>
         </div>
     </div>
@@ -13,7 +13,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -53,9 +53,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button>
-                <button style="background-color:green" type="button"class="btn btn-primary" (click)="postUserDetails()">Edit</button>
-                <button style="background-color:red" type="button" class="btn btn-primary" (click)="updateUserDetails()">Delete</button>
+                <button type="button" class="btn btn-secondary" id="cancel" data-bs-dismiss="modal">Close</button> 
+                <button type="button" *ngIf="showAdd" style="background-color:green" class="btn btn-primary" (click)="postUserDetails()">Add</button>
+                 <button type="button" *ngIf="showUpdate" style="background-color:red"  class="btn btn-primary" (click)="updateUserDetails()">Edit</button>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
 
                 </tr>
             </thead>
-            <tfoot>
+             <!-- <tfoot>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -84,7 +84,7 @@
                     <th>Salary</th>
 
                 </tr>
-            </tfoot>
+            </tfoot>  -->
             <tbody>
                 <tr *ngFor="let user of userData">
                     <td>{{user.FirstName}}</td>
@@ -93,7 +93,7 @@
                     <td>{{user.PhoneNo}}</td>
                     <td>{{user.Salary}}</td>
                     <td>
-                        <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        <a type="button"type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             (click)="postData(user)">Edit</a>
                     </td>
                     <td>

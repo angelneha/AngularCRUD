@@ -13,6 +13,8 @@ export class EmployeeDashboardComponent implements OnInit {
   formValue !: FormGroup;
   userModelObj:UserModel=new UserModel();
   userData:any=[];
+  showAdd !: boolean;
+  showUpdate !: boolean;
   constructor(private formbuilder: FormBuilder,private api:ServicesService) { }
   getUser(){
     this.api.getUser().subscribe(res=>{
@@ -31,6 +33,11 @@ export class EmployeeDashboardComponent implements OnInit {
     err=>{
       alert("Error Detected")
     })
+  }
+  clickAddUser(){
+    this.formValue.reset();
+    this.showAdd = true;
+    this.showUpdate = false;
   }
   postUserDetails(){
     this.userModelObj.FirstName=this.formValue.value.FirstName;
@@ -53,6 +60,8 @@ export class EmployeeDashboardComponent implements OnInit {
     })
   }
   postData(user:any){
+    this.showAdd = false;
+    this.showUpdate = true;
     this.userModelObj.id=user.id;
     this.formValue.controls['FirstName'].setValue(user.FirstName)
     this.formValue.controls['LastName'].setValue(user.LastName)
